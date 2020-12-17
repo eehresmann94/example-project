@@ -12,6 +12,10 @@ import {
 import MenuIcon from '@material-ui/icons/Menu';
 import NotificationsIcon from '@material-ui/icons/NotificationsOutlined';
 import InputIcon from '@material-ui/icons/Input';
+import {Brightness2Sharp, Brightness7Sharp} from "@material-ui/icons";
+import {useDispatch, useSelector} from "react-redux";
+import {RootState} from "../../redux/rootReducer";
+import {changeThemeMode} from "../../redux/actions/userActions";
 
 
 interface TopBarProps {
@@ -31,8 +35,14 @@ const useStyles = makeStyles(() => ({
 
 const TopBar = ({className, onMobileNavOpen, ...rest}: TopBarProps) => {
   const classes = useStyles();
+  const themeMode = useSelector((state: RootState) => state.UserReducer.isDarkMode)
+  const dispatch = useDispatch();
   const [notifications] = useState([]);
+  const icon = !themeMode ? <Brightness2Sharp/> : <Brightness7Sharp/>;
 
+  const selectThemeMode = () => {
+    dispatch(changeThemeMode(!themeMode));
+  }
 
   return (
     <AppBar
@@ -42,6 +52,12 @@ const TopBar = ({className, onMobileNavOpen, ...rest}: TopBarProps) => {
     >
       <Toolbar>
         <Box flexGrow={1}/>
+        <IconButton
+          color='inherit'
+          onClick={() => selectThemeMode()}
+        >
+          {icon}
+        </IconButton>
         <Hidden mdDown>
           <IconButton color="inherit">
             <Badge

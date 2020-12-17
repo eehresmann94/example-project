@@ -3,12 +3,19 @@ import shadows from './shadows';
 import typography from './typography';
 
 export const lightTheme = createMuiTheme({
-  palette: {
-    type: 'light'
+    palette: {
+      type: 'light',
+      primary: {
+        main: colors.cyan[700],
+      },
+      secondary: {
+        main: colors.amber[700]
+      },
   },
   shadows,
-  typography
-});
+  typography,
+})
+;
 
 export const darkTheme = createMuiTheme({
   palette: {

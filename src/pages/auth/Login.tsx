@@ -1,7 +1,7 @@
 import React from 'react';
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import {Link as RouterLink, useNavigate} from 'react-router-dom';
 import * as Yup from 'yup';
-import { Formik } from 'formik';
+import {Formik} from 'formik';
 import {
   Box,
   Button,
@@ -15,6 +15,8 @@ import {
 import Page from "../../components/Page";
 import Facebook from '../../icons/Facebook';
 import Google from "../../icons/Google";
+import {useDispatch} from "react-redux";
+import {signIn} from "../../redux/actions/userActions";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const LoginView = () => {
+  const dispatch = useDispatch();
   const classes = useStyles();
   const navigate = useNavigate();
 
@@ -50,11 +53,11 @@ const LoginView = () => {
               password: Yup.string().max(255).required('Password is required')
             })}
             onSubmit={() => {
-              navigate('/app/dashboard', { replace: true });
+              dispatch(signIn(navigate))
             }}
           >
             {({
-               // @ts-ignore
+                // @ts-ignore
                 errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values
               }) => (
               <form onSubmit={handleSubmit}>
@@ -85,7 +88,7 @@ const LoginView = () => {
                     <Button
                       color="primary"
                       fullWidth
-                      startIcon={<Facebook />}
+                      startIcon={<Facebook/>}
                       onClick={() => handleSubmit}
                       size="large"
                       variant="contained"
@@ -100,7 +103,7 @@ const LoginView = () => {
                   >
                     <Button
                       fullWidth
-                      startIcon={<Google />}
+                      startIcon={<Google/>}
                       onClick={() => handleSubmit}
                       size="large"
                       variant="contained"

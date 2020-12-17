@@ -4,8 +4,18 @@ import LandingLayout from "./layouts/LandingLayout/LandingLayout";
 import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
 import NotFoundView from "./pages/errors/NotFoundPage";
+import LoggedInLayout from "./layouts/LoggedInLayout/LogginInLayout";
+import Home from "./pages/Home";
 
 const routes= [
+  {
+    path: 'app',
+    element: <LoggedInLayout />,
+    children: [
+      { path: 'home', element: <Home />},
+      { path: '*', element: <Navigate to="/404" /> }
+    ]
+  },
   {
     path: '/',
     element: <LandingLayout />,

@@ -12,7 +12,7 @@ function App() {
   const themeMode = useSelector((state: RootState) => state.UserReducer.isDarkMode)
   const routing = useRoutes(routes);
   return (
-      <ThemeProvider theme={themeMode ? lightTheme : darkTheme}>
+      <ThemeProvider theme={themeMode ? darkTheme: lightTheme}>
         <GlobalStyles/>
         {routing}
       </ThemeProvider>

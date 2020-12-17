@@ -1,10 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Outlet } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core';
 import TopBar from './TopBar';
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../redux/rootReducer";
 import ProtectedRoute from "../../components/auth/ProtectedRoute";
+import NavBar from "./Navigation/NavBar";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,16 +33,18 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const LandingLayout = () => {
+const LoggedInLayout = () => {
+  const [isMobileNavOpen, setMobileNavOpen] = useState(false);
   const classes = useStyles();
-  const themeMode = useSelector((state: RootState) => state.UserReducer.isDarkMode)
 
   return (
     <div className={classes.root}>
-      <TopBar  theme={themeMode} />
+      <TopBar onMobileNavOpen={() => setMobileNavOpen(true)}/>
+      <NavBar onMobileClose={() => setMobileNavOpen(false)} openMobile={isMobileNavOpen} />
       <div className={classes.wrapper}>
         <div className={classes.contentContainer}>
           <div className={classes.content}>
+            <ProtectedRoute />
             <Outlet />
           </div>
         </div>
@@ -50,4 +53,4 @@ const LandingLayout = () => {
   );
 };
 
-export default LandingLayout;
+export default LoggedInLayout;
