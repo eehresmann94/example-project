@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import { Outlet } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core';
+import {Outlet} from 'react-router-dom';
+import {Container, makeStyles} from '@material-ui/core';
 import TopBar from './TopBar';
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../redux/rootReducer";
@@ -39,13 +39,13 @@ const LoggedInLayout = () => {
 
   return (
     <div className={classes.root}>
+      <ProtectedRoute/>
       <TopBar onMobileNavOpen={() => setMobileNavOpen(true)}/>
-      <NavBar onMobileClose={() => setMobileNavOpen(false)} openMobile={isMobileNavOpen} />
+      <NavBar onMobileClose={() => setMobileNavOpen(false)} openMobile={isMobileNavOpen}/>
       <div className={classes.wrapper}>
         <div className={classes.contentContainer}>
           <div className={classes.content}>
-            <ProtectedRoute />
-            <Outlet />
+            <Outlet/>
           </div>
         </div>
       </div>
